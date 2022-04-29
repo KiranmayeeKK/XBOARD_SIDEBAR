@@ -1,0 +1,180 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+}
+ul li:hover {
+    cursor: pointer;
+}
+a {
+    color: grey !important;
+    text-decoration: none !important; 
+}
+
+h1,h2,h3,h4,h5 {
+    font-weight: 500 !important;
+}
+
+hr {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+a:hover {
+    text-decoration: underline !important;
+}
+.title-bar-custom {
+    height: 4rem;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.2); 
+}
+#body-overlay {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+.real-menu-custom {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    z-index: 4;
+    width: 250px;
+    height: 100%;
+    padding: .5rem 1rem;
+    box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
+    background-color: white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: ease 0.2s all;
+    overflow-y: scroll;
+}
+
+.side-bar-custom {
+    height: 100vh;
+    display:none;
+    color :rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+
+.main-window-custom {
+    padding: 1rem;
+    height: 100%;
+}
+.toc-bar-custom {
+    height: 100%;
+    display:none;
+    padding: 1rem;
+    color :rgba(0, 0, 0, 0.6);
+}
+
+.accordion-btn-css {
+    width: 100%;
+    display: flex;
+    border : none;
+    color: #737373 !important;
+    padding-bottom: 0.8rem;
+    padding-top: 0.8rem;
+    padding-left: none !important;
+    padding-right: none !important;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: 500;
+    letter-spacing: 0.2;
+    background-color: white !important;
+}
+
+.accordion-btn-css::before {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    content: "\f105";
+    font-family: 'Font Awesome\ 5 Free'; 
+    color: #737373;
+    font-weight: 600;
+    transition: transform .2s ease-in-out;
+    margin-right: 0.5rem;
+}
+
+.accordion-btn-css:not(.collapsed)::before{
+   transform:rotate(90deg)
+}
+
+.list-item-custom {
+    width: 100%;
+    display: flex;
+    color: #737373 !important;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: 500;
+    letter-spacing: 0.2;
+}
+
+.card-subtitle-css{
+    font-size: small;
+    font-weight: 600;
+    color: #586069;
+}
+
+.card-css {
+    border: 1px solid !important;
+    border-radius: 0.5rem !important;
+    margin-bottom: 2rem;
+}
+
+.card-css img{
+    object-fit: cover;
+    height: 70vh;
+    min-height: 400px;
+    transition: 0.2s all;
+    border-radius: 0.5rem;
+}
+
+.card-css img:hover{
+    filter: brightness(50%);
+}
+.card-text-css {
+    color: #292B2E;
+    padding-top: 1rem;
+    text-align: justify !important;
+}
+
+
+
+
+@media screen and (min-width: 768px) { 
+    #menu-btn {
+        display: none;
+    }
+    #side-bar {
+        display: block;
+    }
+}
+
+
+@media screen and (min-width: 1201px) { 
+    .toc-bar-custom {
+        display: block;
+    }
+    #side-bar #sidebar-toc {
+        display: none;
+    }
+    .side-bar-custom {
+        overflow-y: hidden;
+    }
+}

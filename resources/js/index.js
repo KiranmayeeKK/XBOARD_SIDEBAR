@@ -4,6 +4,7 @@ function init() {
     //Add event from js the keep the marup clean
     document.getElementById("menu-btn").addEventListener("click", toggleMenu);
     document.getElementById("body-overlay").addEventListener("click", toggleMenu);
+    // Add events to monitor for load and resize events and then populate the side bar accordingly
     window.addEventListener('load', (event) => {
         populateSidebar();
        
@@ -19,9 +20,11 @@ function init() {
     xlScreen.addEventListener("change", updateXLDisplay);
     */
 }
+
+/* If window size is small, then create sidebar and add it to the button-sidebar 
+otherwise append it to the side-bar element */
 function populateSidebar() {
     if(window.matchMedia("(max-width: 767px)").matches) {
-        console.log("if");
             /* To populate sidebar with relevant topics*/
             const buttonSideBar = document.getElementById("button-sidebar");
             buttonSideBar.innerHTML= createSidebarElements("sidebar-toc", "related-topics","accordion"); 
@@ -30,7 +33,6 @@ function populateSidebar() {
      }
      else
      {
-         console.log("else");
          const sidebar = document.getElementById("side-bar");
          sidebar.innerHTML= createSidebarElements("sidebar-toc", "related-topics","accordion");
          const buttonSideBar = document.getElementById("button-sidebar");
@@ -41,8 +43,10 @@ function populateSidebar() {
      loadLatestNews(main_topic);
 }
 
+//creates a div with toc and related topic sub divs, later populateRelatedTopics and appendtoTOC functions 
+//appends the corresponding elements to them
+
 function createSidebarElements(tocDivID, relatedTopicsDivID, accordionDivID) {
-    console.log("createSidebarElements", tocDivID, relatedTopicsDivID, accordionDivID);
     return `<div class=" d-flex flex-column">
     <div id="${tocDivID}"></div>
     <div id="${relatedTopicsDivID}">
@@ -79,6 +83,11 @@ document.addEventListener('readystatechange', function() {
     }
 });
 
+//Loops through the array of topics in magazines.js and creates an accordion item for each topic
+
+// >sport
+// >technology
+// >food
 
 function populateRelatedTopics() {
     topics.forEach(async (element,index)  => {
@@ -88,8 +97,9 @@ function populateRelatedTopics() {
 
 }
 
+//creates an accordion item, appends it to the accordion element created in the createSidebarElements function
+
 async function addAccordionItem(title, index) {
-    console.log(addAccordionItem);
     const accordionID = "accordion-item"+index;
     const headingID = "heading"+index;
     const collapseID = "collapse"+index;
@@ -106,6 +116,8 @@ async function addAccordionItem(title, index) {
     await addAccordionSubItems(title, index);
   }
 
+// This function adds the accordion sub items. It takes the rss link corresponding to the according item
+//say sport and iterate through all the items in it and appends the title as accordion sub elements
 
 async function addAccordionSubItems(title, index) {
     
@@ -137,6 +149,7 @@ async function addAccordionSubItems(title, index) {
 }
 }
 
+//Function to festch the rss data in JSON format
 
 async function getJSON(rssLink) {
     try {
@@ -152,6 +165,9 @@ async function getJSON(rssLink) {
       return null;
   }
 
+// Function to load main display window. On window load, it is called with topic news.
+// creates card for each item of the topic and appends to the main window
+// Also it appends the title of the items in the topic to the toc
   async function loadLatestNews(topic) {
   
     if(rssLinks[topic])
@@ -177,12 +193,14 @@ async function getJSON(rssLink) {
  
 }
 
+// This function is called when user clicks on any sub-topic in the related articles
+//It updates the main window with the items from the selected topic and scroll down to the topic selected
+
 async function updateLatestNews(e) {
     const topic = e.target.id.split("_")[0];
     const cardID = getCardID(topic, e.target.id.split("_")[1]);
     await loadLatestNews(topic);
     const scrollTo  = document.getElementById(cardID);
-    console.log(scrollTo);
     scrollTo.scrollIntoView();
 }
 
@@ -205,6 +223,9 @@ function createCard(item, topic, idx) {
 </a>
 </div>`
 }
+
+//This function loops through the items and appends them to the toc and 
+//set the ref to the card corresponding to that title
 
 function appendtoTOC(elem, items, topic) {
 
